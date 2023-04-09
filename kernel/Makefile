@@ -4,6 +4,7 @@ ARCH_DIR = src/arch
 
 include $(ARCH_DIR)/make.config
 
+.PHONY: all
 .SUFFIXES: .o .c .asm
 
 
