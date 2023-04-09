@@ -107,5 +107,8 @@ fabric.properties
 !.idea/codeStyles
 !.idea/runConfigurations
 
+myos.*
+grub.cfg
+
 # End of https://www.toptal.com/developers/gitignore/api/cmake,jetbrains+all
 
