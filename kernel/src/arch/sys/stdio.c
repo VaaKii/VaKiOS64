@@ -118,7 +118,6 @@ int printf(const char *restrict format, ...) {
             if (!print( &str[0], len)) {
                 return -1;
             }
-            print("\n",1);
             written += len+ 1;
         } else {
             format = format_begun_at;
