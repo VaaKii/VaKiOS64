@@ -1,7 +1,7 @@
 rm -rf build
 
 cd kernel
-make all
+make all || exit 1
 cd ..
 
 mkdir -p isodir
