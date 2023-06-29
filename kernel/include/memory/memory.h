@@ -21,5 +21,8 @@ extern void pfree(void *mem);
 extern void* memcpy(void* dest, const void* src, size_t count );
 extern void* memset (void * ptr, int value, size_t num );
 extern void* memset16 (void *ptr, uint16_t value, size_t num);
+extern int memcmp(const void *str1, const void *str2, size_t count);
+
+
 
 #endif //VAKIOS64_MEMORY_H

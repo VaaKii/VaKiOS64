@@ -1,5 +1,5 @@
 CC = i686-elf-gcc
-CC_FLAGS = -std=gnu99 -g -ffreestanding -O2 -Wall -Wextra -Iinclude
+CC_FLAGS = -std=gnu99 -g -ffreestanding -O2 -Wall -Wextra -Iinclude -mgeneral-regs-only
 ARCH_DIR = src/arch
 
 include $(ARCH_DIR)/make.config

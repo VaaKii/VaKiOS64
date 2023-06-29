@@ -86,3 +86,19 @@ void terminal_writestring(const char* data)
 {
     terminal_write(data, strlen(data));
 }
+
+void erase(){
+    if(--terminal_column == 0 && terminal_row != 0){
+        terminal_row--;
+        terminal_column = 80;
+    }
+
+    const size_t index = terminal_row * VGA_WIDTH + terminal_column;
+    terminal_buffer[index] = vga_entry(' ', terminal_color);
+}
+
+void clear() {
+memset16((void*)0xB8000, vga_entry(' ',terminal_color),80*25);
+    terminal_row=0;
+    terminal_column=0;
+}

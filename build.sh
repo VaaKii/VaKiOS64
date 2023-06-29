@@ -1,6 +1,9 @@
-rm -rf build
+#!/bin/sh
+set -e
 
-cd kernel
+rm -rf ./build
+
+cd ./kernel
 make all || exit 1
 cd ..
 

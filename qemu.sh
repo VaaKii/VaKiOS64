@@ -1,6 +1,8 @@
-. ./build.sh
+#!/bin/bash
 
-qemu-system-i386 -cdrom ./myos.iso -monitor stdio -S -s
+sh build.sh
+
+qemu-system-i386 -cdrom myos.iso -monitor stdio -S -s
 
 
 rm -rf isodir

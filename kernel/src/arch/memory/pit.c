@@ -3,10 +3,12 @@
 #include <sys/stdio.h>
 #include <memory/idt.h>
 
-void pit_irq()
-{
-    pic_send_eoi(0);
-}
+
+struct interrupt_frame;
+
+__attribute__((interrupt))
+void pit_irq(struct interrupt_frame* frame){pic_send_eoi(0);}
+
 
 static inline void __pit_send_cmd(uint8_t cmd)
 {

@@ -33,6 +33,7 @@ void exc_bound()
 void exc_invopcode()
 {
     printf("Invalid opcode.\n");
+    for(;;);
 }
 
 void exc_device_not_avail()
@@ -58,6 +59,23 @@ void exc_invtss()
 void exc_segment_not_present()
 {
     panic("Segment not present.\n");
+}
+
+void exc_paging(){
+    uint32_t error;
+    uint32_t cr2;
+    asm volatile("pop %%eax": "=a"(error));
+    asm volatile("mov %%cr2,%%eax": "=a"(cr2));
+    printf("Page error. Error code %x, CR2: %x\nExplanation: \n",error,cr2);
+    if(error & 0x01) printf("Present\n");
+    if(error & 0x02) printf("Write\n");
+    if(error & 0x04) printf("User\n");
+    if(error & 0x08) printf("Reserved write\n");
+    if(error & 0x10) printf("Instruction Fetch\n");
+    if(error & 0x20) printf("Protection key\n");
+    if(error & 0x40) printf("Shadow stack\n");
+    if(error & 0x8000) printf("Software Guard Extensions\n");
+    for(;;);
 }
 
 void exc_ssf()
@@ -93,6 +111,7 @@ void exception_init()
     idt_set_descriptor(11, exc_segment_not_present);
     idt_set_descriptor(12, exc_ssf);
     idt_set_descriptor(13, exc_gpf);
+    idt_set_descriptor(14, exc_paging);
     idt_set_descriptor(15, exc_reserved);
     return;
 }

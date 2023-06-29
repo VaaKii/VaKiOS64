@@ -4,8 +4,10 @@
 
 uint32_t page_directory[1024] __attribute__((aligned(4096)));
 uint32_t first_page_table[1024] __attribute__((aligned(4096)));
+uint32_t second_page_table[1024] __attribute__((aligned(4096)));
 
 
+__attribute__((naked))
 void paging_enable()
 {
     asm volatile("mov %%eax, %%cr3": :"a"(&page_directory[0]));
@@ -24,7 +26,13 @@ void paging_init(){
     {
         first_page_table[i] = (i * 0x1000) | 3;
     }
+
+    for(unsigned int i = 0;i<1024;i++){
+        second_page_table[i] =  (i* 0x1000)|3; //Paging for videomemory
+    }
     page_directory[0] = ((unsigned int)first_page_table | 3);
+    page_directory[1] = ((unsigned int)second_page_table | 3);
     paging_enable();
-    printf("Paging is set!\n");
+    //asm volatile("add $0x0000008,%esp"); //This is made for the optimizer, because the fucker fucked up 8 bytes
+
 }
