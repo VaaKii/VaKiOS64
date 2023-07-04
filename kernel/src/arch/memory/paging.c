@@ -33,6 +33,5 @@ void paging_init(){
     page_directory[0] = ((unsigned int)first_page_table | 3);
     page_directory[1] = ((unsigned int)second_page_table | 3);
     paging_enable();
-    //asm volatile("add $0x0000008,%esp"); //This is made for the optimizer, because the fucker fucked up 8 bytes
 
 }
