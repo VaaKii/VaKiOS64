@@ -7,8 +7,10 @@
 #include <memory/pit.h>
 #include <drivers/keyboard.h>
 #include <memory/memory.h>
+#include <tty/vga.h>
 
 extern uint32_t kernel_end;
+
 
 static char *buffer = 0;
 static char c = 0;
@@ -34,11 +36,22 @@ void shell(){
         if (c=='\n'){
             putchar('\n');
             if(buffer[0]!=0) {
-                if (loc==3&&memcmp(buffer, "ily", loc) == 0) {
+                if (!strcmp(buffer,"ily")) {
                     printf("I love you my sunshine <3\n");
                 }
-                if (loc==12&&memcmp(buffer, "sergey pidor", loc) == 0) {
+                if (!strcmp(buffer,"sergey pidor")) {
                     printf("Sam pidor!\n");
+                }
+                if(!strcmp(buffer,"cls")){
+                    clear();
+                }
+                if(!strcmp(buffer,"vgatest")){
+                    printf("Testing VGA\n");
+                    for(int i = 50; i < 100;i++){
+                        for(int g = 100;i< 200;i++){
+                            putpixel(i,g,VGA_COLOR_RED);
+                        }
+                    }
                 }
 
 
